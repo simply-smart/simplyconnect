@@ -1,0 +1,37 @@
+{
+    "name": "simply-smart/simplyconnect",
+    "type": "library",
+    "license": "COMMERCIAL",
+    "support": {
+        "source": "https://github.com/simply-smart/simplyconnect/issues"
+      },
+    "authors":
+    [
+        {
+            "name": "Marcin Ulezalka",
+            "email": "marcin.ulezalka@simplysmart.pl"
+        }
+    ],
+    "require":
+    {
+        "php": "^8.2",
+        "vlucas/phpdotenv": "^5.6",
+        "monolog/monolog": "^3.5"
+    },
+    "autoload": 
+    {
+        "psr-4":
+        {
+            "App\\":"app/",
+            "Simply\\Connect\\":"src/simplyconnect/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Simply\\Connect\\Tests\\": "tests/simplyconnect/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}
