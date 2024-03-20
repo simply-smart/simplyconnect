@@ -14,7 +14,7 @@ namespace Simply\Connect\Interfaces;
 use PDO;
 use Simply\Connect\Config\DatabaseConfig;
 
-interface DatabaseInterface
+interface IDatabaseController
 {
     /**
      * Nawiązuje połączenie z bazą danych na podstawie podanej konfiguracji.

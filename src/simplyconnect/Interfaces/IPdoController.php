@@ -13,7 +13,7 @@ namespace Simply\Connect\Interfaces;
 use PDO;
 use Simply\Connect\Exceptions\DatabaseException;
 
-interface PDOInterface
+interface IPdoController
 {
     /**
      * Ustawia połączenie PDO, które ma być używane do operacji na bazie danych.

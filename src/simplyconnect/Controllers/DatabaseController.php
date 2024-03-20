@@ -9,22 +9,21 @@ namespace Simply\Connect\Controllers;
 
 use PDO;
 use PDOException;
-use Simply\Connect\Interfaces\PDOInterface;
-use Simply\Connect\Interfaces\DatabaseInterface;
+use Simply\Connect\Interfaces\IPdoController;
+use Simply\Connect\Interfaces\IDatabaseController;
 use Simply\Connect\Config\DatabaseConfig;
 use Simply\Connect\Exceptions\DatabaseException;
 
 
-class DatabaseController implements DatabaseInterface
+class DatabaseController implements IDatabaseController
 {
-
     /**
-     * Przekazuje połączenie PDO do obiektu implementującego PDOInterface.
+     * Przekazuje połączenie PDO do obiektu implementującego IPdoController.
      *
-     * @param PDOInterface $pdoController Obiekt, który ma otrzymać połączenie.
+     * @param IPdoController $pdoController Obiekt, który ma otrzymać połączenie.
      * @param DatabaseConfig $config Konfiguracja bazy danych dla połączenia.
      */
-    public function provideConnection(PDOInterface $pdoController, DatabaseConfig $config): void
+    public function provideConnection(IPdoController $pdoController, DatabaseConfig $config): void
     {
         $pdo = $this->connect($config);
         $pdoController->setConnection($pdo);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Fasada DatabaseFacade do inicjalizacji połączenia z bazą danych.
  *
@@ -12,29 +13,33 @@ namespace Simply\Connect\Facades;
 
 use Simply\Connect\Config\DatabaseConfig;
 use Simply\Connect\Controllers\DatabaseController;
+use Simply\Connect\Controllers\PDOController;
 use Simply\Connect\Exceptions\DatabaseException;
 use Simply\Connect\Exceptions\SimplyException;
 
 class DatabaseFacade
 {
     /**
-     * Inicjuje połączenie z bazą danych przy użyciu dostarczonej konfiguracji.
-     *
-     * Metoda tworzy instancję kontrolera bazy danych i używa jej do nawiązania
-     * połączenia z bazą danych na podstawie przekazanej konfiguracji. W przypadku
-     * problemów z połączeniem, metoda zgłasza wyjątek.
+     * Inicjuje połączenie z bazą danych przy użyciu dostarczonej konfiguracji
+     * i przekazuje to połączenie do PDOController.
      *
      * @param DatabaseConfig $dbConfig Konfiguracja bazy danych.
      * @return void
      * @throws DatabaseException Gdy połączenie z bazą danych nie może być nawiązane.
+     * @throws SimplyException Gdy wystąpi nieoczekiwany błąd.
      */
     public static function init(DatabaseConfig $dbConfig): void
     {
         $dbController = new DatabaseController();
+        $pdoController = new PDOController();
 
         try {
-            $connection = $dbController->connect($dbConfig);
-            echo "Connection to the database has been successfully established.";
+            // Przekazanie połączenia PDO do PDOController
+            $dbController->provideConnection($pdoController, $dbConfig);
+            echo "Connection to the database has been successfully established and passed to PDOController.";
+        } catch (DatabaseException $e) {
+            echo "Database error: " . $e->getMessage();
+            throw $e; // Rzuca wyjątek dalej
         } catch (\PDOException $e) {
             echo "PDO error: " . $e->getMessage();
             throw new DatabaseException("Unable to connect to the database using PDO.", 0, $e);

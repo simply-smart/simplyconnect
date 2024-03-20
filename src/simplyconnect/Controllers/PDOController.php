@@ -9,11 +9,11 @@
 namespace Simply\Connect\Controllers;
 
 use PDO;
-use Simply\Connect\Interfaces\PDOInterface;
+use Simply\Connect\Interfaces\IPdoController;
 use Simply\Connect\Exceptions\DatabaseException;
 
 
-class PDOController implements PDOInterface
+class PDOController implements IPdoController
 {
     /**
      * @var PDO|null Obiekt połączenia z bazą danych lub null, jeśli połączenie nie zostało ustawione.
